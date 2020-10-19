@@ -11,6 +11,7 @@ using System.IO;
 using System.IO.Compression;
 //using System.IO.Compression.FileSystem;
 using System.Diagnostics;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace FileManager
 {
@@ -36,6 +37,7 @@ namespace FileManager
         public string destFolderToMove;
         public string destFolderToCopy;
         public string RenamingObjectDirectory;
+        public string theme;
         public bool first_click_on_copy = true;
         public bool second_click_on_copy = false;
         public bool first_click_on_move = true;
@@ -49,12 +51,68 @@ namespace FileManager
         public int bytesCopied;
         public const int BufferSize = 16384;
         public byte[] buffer = new byte[BufferSize];
+        public Font DefaultFont = new Font("Microsoft Sans Serif", (float)8.25, FontStyle.Regular);
+        public FileManagerSettings userPrefs;
+        public BinaryFormatter binFormat = new BinaryFormatter();
+
+        [Serializable]
+        public class FileManagerSettings
+        {
+            public Color backColorForm;
+            public Image backgroundImage;
+            public string theme;
+            public Font font;
+            public Font menuStripFont;
+            public double opacity;
+            public FileManagerSettings(Form1 frm1)
+            {
+                theme = frm1.theme;
+                backColorForm = frm1.BackColor;
+                backgroundImage = frm1.BackgroundImage;
+                font = frm1.Font;
+                menuStripFont = frm1.menuStrip.Font;
+                opacity = frm1.Opacity;
+            }
+            public FileManagerSettings()
+            {
+
+            }
+        }
+
+
+
         public Form1()
         {
             InitializeComponent();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\FileManagerSettings.dat"))
+            {
+                Stream fstream = File.OpenRead(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\FileManagerSettings.dat");
+                userPrefs = (FileManagerSettings)binFormat.Deserialize(fstream);
+                fstream.Close();
+                //восстанавливаем вид формы
+                if (userPrefs.theme == "WHITE")
+                {
+                    Form2.ChangeTheme(Color.White, Color.Black, this);
+                    this.theme = "WHITE";
+                }
+                else if (userPrefs.theme == "BLACK")
+                {
+                    Form2.ChangeTheme(Color.Black, Color.Green, this);
+                    this.theme = "BLACK";
+                }
+                this.BackColor = userPrefs.backColorForm;
+                this.BackgroundImage = userPrefs.backgroundImage;
+                this.Font = userPrefs.font;
+                this.menuStrip.Font = userPrefs.menuStripFont;
+                this.Opacity = userPrefs.opacity;
+            }
+            else
+            {
+                userPrefs = new FileManagerSettings(this);
+            }
             //загружаем приводы
             DriveInfo[] drives = DriveInfo.GetDrives();
             foreach(DriveInfo info in drives)
@@ -134,7 +192,7 @@ namespace FileManager
             EscapeHandler(ListOfItemsRight, CurrentPathRight, the_name_of_the_current_folder_or_file_right, ref current_files_right);
         }
 
-        private void EscapeHandler(ListBox ListOfItems, TextBox CurrentPath, string the_name_of_the_current_folder_or_file, ref List<string> current_files)
+        private void EscapeHandler(ListBox ListOfItems, RichTextBox CurrentPath, string the_name_of_the_current_folder_or_file, ref List<string> current_files)
         {
             
             if (CurrentPath.Text.Length > 0)
@@ -171,7 +229,7 @@ namespace FileManager
             }      
         }
 
-        private void DoubleClickHandler(ListBox ListOfItems, TextBox CurrentPath, string the_name_of_the_current_folder_or_file, ref List<string> current_files) //открытие папки
+        private void DoubleClickHandler(ListBox ListOfItems, RichTextBox CurrentPath, string the_name_of_the_current_folder_or_file, ref List<string> current_files) //открытие папки
         {
             if (ListOfItems.SelectedItem != null) //если некоторый предмет был выбран  
             {
@@ -197,7 +255,7 @@ namespace FileManager
             }
         }
         
-        private int IsFile(ListBox ListOfItems, TextBox CurrentPath, ref List<string> current_files) //
+        private int IsFile(ListBox ListOfItems, RichTextBox CurrentPath, ref List<string> current_files) //
         {
             if (ListOfItems.SelectedItem != null)
             {
@@ -220,7 +278,7 @@ namespace FileManager
             }
         }
 
-        private void GetAndDisplayDirectory(ListBox ListOfItems, TextBox CurrentPath, string the_name_of_the_current_folder_or_file, ref List<string> current_files)
+        private void GetAndDisplayDirectory(ListBox ListOfItems, RichTextBox CurrentPath, string the_name_of_the_current_folder_or_file, ref List<string> current_files)
         {
             if (ListOfItems == ListOfItemsLeft)
             {
@@ -420,7 +478,7 @@ namespace FileManager
                 the_folder_is_moving = false;
             }
         }
-        private void SomePanelWasClickedLast(ListBox ListOfItems, TextBox CurrentPath, ref List<string> current_files)
+        private void SomePanelWasClickedLast(ListBox ListOfItems, RichTextBox CurrentPath, ref List<string> current_files)
         {
             if (ListOfItems.SelectedItem != null) //если нажали на какой-то элемент панели
             {
@@ -568,7 +626,7 @@ namespace FileManager
                 DeleteInterface(ListOfItemsRight, CurrentPathRight, ref current_files_right);
             }
         }
-        private void DeleteInterface(ListBox ListOfItems, TextBox CurrentPath, ref List<string> current_files)
+        private void DeleteInterface(ListBox ListOfItems, RichTextBox CurrentPath, ref List<string> current_files)
         {
             if (IsFile(ListOfItems, CurrentPath, ref current_files).Equals(1))
             {
@@ -645,7 +703,7 @@ namespace FileManager
             ArchiveInterface(ListOfItemsRight, CurrentPathRight, ref current_files_right, ref gzipped_files);
         }
         
-        private void ArchiveInterface(ListBox ListOfItems, TextBox CurrentPath, ref List<string> current_files, ref List<string> gzipped_files) //зачем current_files через ref передавать????
+        private void ArchiveInterface(ListBox ListOfItems, RichTextBox CurrentPath, ref List<string> current_files, ref List<string> gzipped_files) //зачем current_files через ref передавать????
         {
             if (ListOfItems.SelectedItem != null)
             {
@@ -717,6 +775,13 @@ namespace FileManager
                 ZipFile.ExtractToDirectory(sourcePath, destPath);
             }
         }
-        
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 form = new Form2(this);
+            form.Show();
+        }
+
+
     }
 }

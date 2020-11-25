@@ -1,0 +1,14 @@
+C:\Users\uberm\source\repos\OlegGolovanovHW\FileManager\FileManager\bin\Debug\FileManager.exe.config
+C:\Users\uberm\source\repos\OlegGolovanovHW\FileManager\FileManager\bin\Debug\FileManager.exe
+C:\Users\uberm\source\repos\OlegGolovanovHW\FileManager\FileManager\bin\Debug\FileManager.pdb
+C:\Users\uberm\source\repos\OlegGolovanovHW\FileManager\FileManager\obj\Debug\FileManager.csprojAssemblyReference.cache
+C:\Users\uberm\source\repos\OlegGolovanovHW\FileManager\FileManager\obj\Debug\FileManager.Form1.resources
+C:\Users\uberm\source\repos\OlegGolovanovHW\FileManager\FileManager\obj\Debug\FileManager.Properties.Resources.resources
+C:\Users\uberm\source\repos\OlegGolovanovHW\FileManager\FileManager\obj\Debug\FileManager.csproj.GenerateResource.cache
+C:\Users\uberm\source\repos\OlegGolovanovHW\FileManager\FileManager\obj\Debug\FileManager.csproj.CoreCompileInputs.cache
+C:\Users\uberm\source\repos\OlegGolovanovHW\FileManager\FileManager\obj\Debug\FileManager.exe
+C:\Users\uberm\source\repos\OlegGolovanovHW\FileManager\FileManager\obj\Debug\FileManager.pdb
+C:\Users\uberm\Source\Repos\OlegGolovanovHW\FileManager\FileManager\obj\Debug\FileManager.Form2.resources
+C:\Users\uberm\Source\Repos\OlegGolovanovHW\FileManager\FileManager\obj\Debug\FileManager.Form3.resources
+C:\Users\uberm\Source\Repos\OlegGolovanovHW\FileManager\FileManager\obj\Debug\FileManager.Form4.resources
+C:\Users\uberm\Source\Repos\OlegGolovanovHW\FileManager\FileManager\obj\Debug\FileManager.Form5.resources

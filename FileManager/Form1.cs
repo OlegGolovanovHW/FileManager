@@ -12,6 +12,7 @@ using System.IO.Compression;
 //using System.IO.Compression.FileSystem;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 
 namespace FileManager
 {
@@ -121,13 +122,13 @@ namespace FileManager
                 ListOfItemsRight.Items.Add(info.Name);
             }
             WatcherLeft.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
-            WatcherRight.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
             WatcherLeft.Filter = "";
             WatcherLeft.Changed += WatcherLeft_Change;
             WatcherLeft.Created += WatcherLeft_Change;
             WatcherLeft.Deleted += WatcherLeft_Change;
             WatcherLeft.Renamed += WatcherLeft_Change;
 
+            WatcherRight.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
             WatcherRight.Filter = "";
             WatcherRight.Changed += WatcherRight_Change;
             WatcherRight.Created += WatcherRight_Change;
@@ -137,7 +138,8 @@ namespace FileManager
             ListOfItemsLeft.Click += new EventHandler(ListOfItemsLeft_Click);
             ListOfItemsRight.Click += new EventHandler(ListOfItemsRight_Click);
             ListOfItemsLeft.DoubleClick += new EventHandler(ListOfItemsLeft_DoubleClick);
-            ListOfItemsRight.DoubleClick += new EventHandler(ListOfItemsRight_DoubleClick);    
+            ListOfItemsRight.DoubleClick += new EventHandler(ListOfItemsRight_DoubleClick);
+
         }
         private void WatcherLeft_Change(object source, FileSystemEventArgs e)
         {
@@ -192,7 +194,7 @@ namespace FileManager
             EscapeHandler(ListOfItemsRight, CurrentPathRight, the_name_of_the_current_folder_or_file_right, ref current_files_right);
         }
 
-        private void EscapeHandler(ListBox ListOfItems, RichTextBox CurrentPath, string the_name_of_the_current_folder_or_file, ref List<string> current_files)
+        public void EscapeHandler(ListBox ListOfItems, RichTextBox CurrentPath, string the_name_of_the_current_folder_or_file, ref List<string> current_files)
         {
             
             if (CurrentPath.Text.Length > 0)
@@ -229,7 +231,7 @@ namespace FileManager
             }      
         }
 
-        private void DoubleClickHandler(ListBox ListOfItems, RichTextBox CurrentPath, string the_name_of_the_current_folder_or_file, ref List<string> current_files) //открытие папки
+        public void DoubleClickHandler(ListBox ListOfItems, RichTextBox CurrentPath, string the_name_of_the_current_folder_or_file, ref List<string> current_files) //открытие папки
         {
             if (ListOfItems.SelectedItem != null) //если некоторый предмет был выбран  
             {
@@ -255,7 +257,7 @@ namespace FileManager
             }
         }
         
-        private int IsFile(ListBox ListOfItems, RichTextBox CurrentPath, ref List<string> current_files) //
+        public int IsFile(ListBox ListOfItems, RichTextBox CurrentPath, ref List<string> current_files) //
         {
             if (ListOfItems.SelectedItem != null)
             {
@@ -278,7 +280,7 @@ namespace FileManager
             }
         }
 
-        private void GetAndDisplayDirectory(ListBox ListOfItems, RichTextBox CurrentPath, string the_name_of_the_current_folder_or_file, ref List<string> current_files)
+        public void GetAndDisplayDirectory(ListBox ListOfItems, RichTextBox CurrentPath, string the_name_of_the_current_folder_or_file, ref List<string> current_files)
         {
             if (ListOfItems == ListOfItemsLeft)
             {
@@ -290,6 +292,7 @@ namespace FileManager
                 WatcherRight.Path = CurrentPathRight.Text;
                 WatcherRight.EnableRaisingEvents = true;
             }
+
             string[] allfolders = Directory.GetDirectories(CurrentPath.Text); //получаем список всех папок в директории
             foreach (string folder in allfolders) //Добавляем названия всех папок в список, отвечающий за текущюю директорию
             {
@@ -315,7 +318,7 @@ namespace FileManager
             }
         }
 
-        private string ExtractingNameFromObjectPath(string ObjectPath)
+        public string ExtractingNameFromObjectPath(string ObjectPath)
         {
             string s0 = "";
             string FileName = "";
@@ -782,6 +785,16 @@ namespace FileManager
             form.Show();
         }
 
+        private void SearchForm_Click(object sender, EventArgs e)
+        {
+            Form4 form4 = new Form4();
+            form4.Show();
+        }
 
+        private void DownloadFiles_Click(object sender, EventArgs e)
+        {
+            Form5 form5 = new Form5();
+            form5.Show();
+        }
     }
 }

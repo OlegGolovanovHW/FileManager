@@ -58,6 +58,8 @@
             this.CurrentPathRight = new System.Windows.Forms.RichTextBox();
             this.SearchLeft = new System.Windows.Forms.RichTextBox();
             this.SearchRight = new System.Windows.Forms.RichTextBox();
+            this.SearchForm = new System.Windows.Forms.Button();
+            this.DownloadFiles = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.BackGroundForRename.SuspendLayout();
             this.SuspendLayout();
@@ -144,10 +146,10 @@
             // 
             this.Copy.BackColor = System.Drawing.Color.White;
             this.Copy.ForeColor = System.Drawing.Color.Black;
-            this.Copy.Location = new System.Drawing.Point(4, 600);
+            this.Copy.Location = new System.Drawing.Point(4, 603);
             this.Copy.Margin = new System.Windows.Forms.Padding(2);
             this.Copy.Name = "Copy";
-            this.Copy.Size = new System.Drawing.Size(208, 34);
+            this.Copy.Size = new System.Drawing.Size(147, 34);
             this.Copy.TabIndex = 13;
             this.Copy.Text = "Copy";
             this.Copy.UseVisualStyleBackColor = false;
@@ -156,10 +158,10 @@
             // Move
             // 
             this.Move.BackColor = System.Drawing.Color.White;
-            this.Move.Location = new System.Drawing.Point(218, 600);
+            this.Move.Location = new System.Drawing.Point(155, 603);
             this.Move.Margin = new System.Windows.Forms.Padding(2);
             this.Move.Name = "Move";
-            this.Move.Size = new System.Drawing.Size(208, 34);
+            this.Move.Size = new System.Drawing.Size(147, 34);
             this.Move.TabIndex = 14;
             this.Move.Text = "Move";
             this.Move.UseVisualStyleBackColor = false;
@@ -168,10 +170,10 @@
             // Edit
             // 
             this.Edit.BackColor = System.Drawing.Color.White;
-            this.Edit.Location = new System.Drawing.Point(430, 600);
+            this.Edit.Location = new System.Drawing.Point(306, 603);
             this.Edit.Margin = new System.Windows.Forms.Padding(2);
             this.Edit.Name = "Edit";
-            this.Edit.Size = new System.Drawing.Size(208, 34);
+            this.Edit.Size = new System.Drawing.Size(147, 34);
             this.Edit.TabIndex = 15;
             this.Edit.Text = "Edit";
             this.Edit.UseVisualStyleBackColor = false;
@@ -180,10 +182,10 @@
             // Delete
             // 
             this.Delete.BackColor = System.Drawing.Color.White;
-            this.Delete.Location = new System.Drawing.Point(644, 600);
+            this.Delete.Location = new System.Drawing.Point(457, 603);
             this.Delete.Margin = new System.Windows.Forms.Padding(2);
             this.Delete.Name = "Delete";
-            this.Delete.Size = new System.Drawing.Size(208, 34);
+            this.Delete.Size = new System.Drawing.Size(147, 34);
             this.Delete.TabIndex = 16;
             this.Delete.Text = "Delete";
             this.Delete.UseVisualStyleBackColor = false;
@@ -192,10 +194,10 @@
             // Archive
             // 
             this.Archive.BackColor = System.Drawing.Color.White;
-            this.Archive.Location = new System.Drawing.Point(856, 600);
+            this.Archive.Location = new System.Drawing.Point(610, 603);
             this.Archive.Margin = new System.Windows.Forms.Padding(2);
             this.Archive.Name = "Archive";
-            this.Archive.Size = new System.Drawing.Size(208, 34);
+            this.Archive.Size = new System.Drawing.Size(147, 34);
             this.Archive.TabIndex = 17;
             this.Archive.Text = "Archive";
             this.Archive.UseVisualStyleBackColor = false;
@@ -376,12 +378,37 @@
             this.SearchRight.TabIndex = 23;
             this.SearchRight.Text = "";
             // 
+            // SearchForm
+            // 
+            this.SearchForm.BackColor = System.Drawing.Color.White;
+            this.SearchForm.ForeColor = System.Drawing.Color.Black;
+            this.SearchForm.Location = new System.Drawing.Point(761, 603);
+            this.SearchForm.Name = "SearchForm";
+            this.SearchForm.Size = new System.Drawing.Size(147, 34);
+            this.SearchForm.TabIndex = 24;
+            this.SearchForm.Text = "SearchForm";
+            this.SearchForm.UseVisualStyleBackColor = false;
+            this.SearchForm.Click += new System.EventHandler(this.SearchForm_Click);
+            // 
+            // DownloadFiles
+            // 
+            this.DownloadFiles.BackColor = System.Drawing.Color.White;
+            this.DownloadFiles.Location = new System.Drawing.Point(914, 603);
+            this.DownloadFiles.Name = "DownloadFiles";
+            this.DownloadFiles.Size = new System.Drawing.Size(147, 34);
+            this.DownloadFiles.TabIndex = 25;
+            this.DownloadFiles.Text = "DownloadFiles";
+            this.DownloadFiles.UseVisualStyleBackColor = false;
+            this.DownloadFiles.Click += new System.EventHandler(this.DownloadFiles_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1073, 639);
+            this.Controls.Add(this.DownloadFiles);
+            this.Controls.Add(this.SearchForm);
             this.Controls.Add(this.SearchRight);
             this.Controls.Add(this.SearchLeft);
             this.Controls.Add(this.CurrentPathRight);
@@ -446,6 +473,8 @@
         public System.Windows.Forms.ToolStripMenuItem toolStripMenuFileSecond;
         public System.Windows.Forms.ToolStripMenuItem toolStripMenuConfigurationFirst;
         public System.Windows.Forms.ToolStripMenuItem toolStripMenuInfoFirst;
+        public System.Windows.Forms.Button SearchForm;
+        public System.Windows.Forms.Button DownloadFiles;
     }
 }
 

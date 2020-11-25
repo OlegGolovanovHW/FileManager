@@ -80,6 +80,10 @@ namespace FileManager
             form.Delete.ForeColor = ForeColor;
             form.Archive.BackColor = BackColor;
             form.Archive.ForeColor = ForeColor;
+            form.SearchForm.BackColor = BackColor;
+            form.SearchForm.ForeColor = ForeColor;
+            form.DownloadFiles.BackColor = BackColor;
+            form.DownloadFiles.ForeColor = ForeColor;
             form.SearchLeft.BackColor = BackColor;
             form.SearchLeft.ForeColor = ForeColor;
             form.SearchRight.BackColor = BackColor;
